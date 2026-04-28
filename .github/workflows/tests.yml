@@ -1,0 +1,64 @@
+name: Quality Gate — SauceDemo E2E
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+  schedule:
+    # Executa de segunda a sexta às 08:00 UTC
+    - cron: "0 8 * * 1-5"
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Run E2E Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Set up Chrome
+        uses: browser-actions/setup-chrome@v1
+
+      - name: Run test suite
+        env:
+          BASE_URL: ${{ vars.BASE_URL || 'https://www.saucedemo.com' }}
+          HEADLESS: "true"
+          IMPLICIT_WAIT: "10"
+        run: |
+          pytest \
+            --json-report \
+            --json-report-file=reports/results.json \
+            -v \
+            --tb=short
+
+      - name: Analyze results
+        if: always()
+        run: python scripts/analyze_results.py
+
+      - name: Upload test report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-reports
+          path: reports/
+          retention-days: 30
+
+      - name: Upload logs
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-logs
+          path: logs/
+          retention-days: 30

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "CT03a-credenciais-invalidas",
+    "usuario": "standard_user",
+    "senha": "senha_errada",
+    "mensagem_esperada": "Epic sadface: Username and password do not match any user in this service"
+  },
+  {
+    "id": "CT03b-usuario-bloqueado",
+    "usuario": "locked_out_user",
+    "senha": "secret_sauce",
+    "mensagem_esperada": "Epic sadface: Sorry, this user has been locked out."
+  },
+  {
+    "id": "CT03c-campos-vazios",
+    "usuario": "",
+    "senha": "",
+    "mensagem_esperada": "Epic sadface: Username is required"
+  },
+  {
+    "id": "CT03d-senha-vazia",
+    "usuario": "standard_user",
+    "senha": "",
+    "mensagem_esperada": "Epic sadface: Password is required"
+  }
+]

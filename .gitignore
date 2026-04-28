@@ -1,0 +1,32 @@
+# Ambiente virtual
+.venv/
+venv/
+env/
+
+# Variáveis de ambiente sensíveis
+.env
+
+# Cache Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Relatórios pytest / coverage
+.pytest_cache/
+htmlcov/
+.coverage
+coverage.xml
+
+# Artefatos de execução (mantém o diretório, ignora conteúdo)
+reports/*
+!reports/.gitkeep
+logs/*
+!logs/.gitkeep
+
+# IDEs
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db

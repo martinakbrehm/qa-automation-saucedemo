@@ -1,0 +1,14 @@
+[
+  {
+    "usuario": "standard_user",
+    "senha": "secret_sauce",
+    "perfil": "padrao",
+    "deve_logar": true
+  },
+  {
+    "usuario": "performance_glitch_user",
+    "senha": "secret_sauce",
+    "perfil": "lento",
+    "deve_logar": true
+  }
+]
